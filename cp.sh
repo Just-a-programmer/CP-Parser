@@ -29,7 +29,7 @@ function cprun()
     dir=$(pwd)
     file=$dir/$1
     filename=${file%.cpp}
-    g++-9 --std=c++17 -Wall -O2 $file -o filename
+    g++-9 --std=c++17 -Wall -O2 $file -o $filename
     c=$(find Testcase/ -name "$pre*.in" | wc -l)
     for ((i = 1 ; i <= $c ; i++))
     do
