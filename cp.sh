@@ -4,12 +4,13 @@ red="\033[1;31;40m"
 blue="\033[1;36;40m"
 purple="\033[1;35;40m"
 green="\033[1;32;40m"
+mypath=~/CP_Parser/
 function cpfetch()
 {
     dir=$(pwd)
     cpclean
     mkdir Testcase && cd Testcase
-    python3 ~/Documents/Programming/CP_parser/Parser.py $1
+    python3 $mypath/Parser.py $1
     cd $dir
 }
 function cprun()
