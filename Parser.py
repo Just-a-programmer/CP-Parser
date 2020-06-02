@@ -22,8 +22,12 @@ def parse_problem(problem):
 	Output=Content.find_all(class_="output")
 	n=len(Input)
 	for i in range(n):
-		print(Input[i].find('pre').get_text())
-		print(Output[i].find('pre').get_text())
+		inp=open(problem+str(i+1)+".in","w")
+		out=open(problem+str(i+1)+".out",'w')
+		inp.write(Input[i].find('pre').get_text())
+		out.write(Output[i].find('pre').get_text())
+		inp.close()
+		out.close()
 
 def main():
 	if len(sys.argv)==1:
