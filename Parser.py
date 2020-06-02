@@ -12,6 +12,7 @@ def parse_contest(Content):
 		if pattern.match(x):
 			problems[x]=1
 	return problems
+
 def parse_problem(problem):
 	global URL
 	print("Downloading testcase for problem "+problem)
@@ -24,8 +25,8 @@ def parse_problem(problem):
 	for i in range(n):
 		inp=open(problem+str(i+1)+".in","w")
 		out=open(problem+str(i+1)+".out",'w')
-		inp.write(Input[i].find('pre').get_text())
-		out.write(Output[i].find('pre').get_text())
+		inp.write(Input[i].find('pre').get_text()[1:])
+		out.write(Output[i].find('pre').get_text()[1:])
 		inp.close()
 		out.close()
 
@@ -44,5 +45,6 @@ def main():
 	problems=parse_contest(Content)
 	for i in problems:
 		parse_problem(str(i))
+
 if __name__ == '__main__':
     main()
