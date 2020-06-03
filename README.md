@@ -9,4 +9,9 @@ There are in-total three commands:
 1. `cpfetch <contest_number>`: This will fetch the testcases from the codeforces to the directory TestCase in the Current directory. The contest number should be the one in the URL.
 2. `cprun <file_name>`: This will compile the file and run it for the testcases, the naming convention of the file should be A.cpp, B.cpp,i.e, according to the problem index. You can add more testcases by using similar format
 3. `cpclean`: This will remove the Testcase directory.
-![picture alt]()
+![picture alt](https://github.com/Just-a-programmer/CP-Parser/blob/master/CP_fetch.png?raw=true)
+![picture alt](https://github.com/Just-a-programmer/CP-Parser/blob/master/CP_run.png)
+## Requirements ##
+* Python3
+* Beautifulsoup (`pip3 install Beautifulsoup`)
+* Requests (`pip3 install requests`)
