@@ -32,7 +32,7 @@ function cprun()
     #Change to the extension of your language
     filename=${file%.cpp}
     #Use the compilation command
-    g++-9 --std=c++17 -Wall -O2 $file -o $filename
+    g++-10 --std=c++17 -Wall -O2 $file -o $filename
     c=$(find Testcase/ -name "$pre*.in" | wc -l)
     for ((i = 1 ; i <= $c ; i++))
     do
@@ -58,4 +58,17 @@ function cpclean()
     then
         rm -r Testcase
     fi
+}
+function cppractise()
+{
+    dir=$(pwd)
+    pre=${1%.cpp}
+    if [ ! -d "Testcase" ]
+    then
+       mkdir Testcase
+    fi
+    cd Testcase
+    python3 $mypath/Parser.py $pre
+    cd ../
+    cprun $1
 }
