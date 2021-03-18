@@ -2,12 +2,15 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import sys
+import time
+from selenium import webdriver
 yellow="\033[1;33;40m"
 red="\033[1;31;40m"
 blue="\033[1;36;40m"
 purple="\033[1;35;40m"
 URL="https://codeforces.com/contest/"
 def parse_contest(Content):
+	print(Content)
 	possible=Content.find_all('option')
 	problems={}
 	pattern=re.compile("[A-Z][0-9]?")
@@ -15,14 +18,20 @@ def parse_contest(Content):
 		x=str(i['value'])
 		if pattern.match(x):
 			problems[x]=1
+	print(problems)
 	return problems
 
 def parse_problem(problem):
 	global URL
 	print(yellow+"Downloading testcase for problem "+problem+" ...")
 	url=URL+"/problem/"+problem
-	page=requests.get(url)
-	Content=BeautifulSoup(page.content,'html.parser')
+	#page=requests.get(url)
+	browser=webdriver.Safari()
+	browser.get(url)
+	time.sleep(3)
+	page=browser.page_source
+	browser.close()
+	Content=BeautifulSoup(page,'lxml')
 	Input=Content.find_all(class_="input")
 	Output=Content.find_all(class_="output")
 	n=len(Input)
@@ -79,10 +88,18 @@ def main():
 	URL+=str(sys.argv[1])
 	print(URL)
 	print(yellow+"Establishing Connection ...")
-	page=requests.get(URL)
+	#page=requests.get(URL)
+	browser=webdriver.Safari()
+	browser.get(URL)
+	time.sleep(3)
+	page=browser.page_source
+	print(page)
+	#print(page)
+	browser.close()
+	#exit()
 	print(blue+"Connection Established.")
 	print(yellow+"Fetching Problems...")
-	Content=BeautifulSoup(page.content,'html.parser')
+	Content=BeautifulSoup(page,'lxml')
 	problems=parse_contest(Content)
 	for i in problems:
 		parse_problem(str(i))
